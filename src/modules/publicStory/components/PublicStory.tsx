@@ -3,14 +3,15 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styled, { css, createGlobalStyle } from 'styled-components';
 import tw from 'twin.macro';
-import { Value } from 'slate';
-import Html from 'slate-html-serializer';
+import { Node } from 'slate';
+// import Html from 'slate-html-serializer';
 import format from 'date-fns/format';
 import { NextSeo } from 'next-seo';
 import { Story, SettingsFile } from '../../../types';
 import { Container } from '../../../components';
 import { sigleConfig } from '../../../config';
 import { sanitizeHexColor, sanitizeLink } from '../../../utils/security';
+import { SlateRenderer } from './SlateRenderer';
 
 const rules = [
   {
@@ -78,8 +79,6 @@ const rules = [
     },
   },
 ];
-
-const html = new Html({ rules });
 
 const Header = styled.div`
   ${tw`py-6 text-black`};
@@ -258,14 +257,9 @@ export const PublicStory = ({ story, settings }: PublicStoryProps) => {
             <CoverImage className="sigle-cover" src={story.coverImage} />
           </Cover>
         )}
-        <Content
-          className="sigle-content"
-          dangerouslySetInnerHTML={{
-            __html: story.content
-              ? html.serialize(Value.fromJSON(story.content))
-              : '',
-          }}
-        />
+        <Content className="sigle-content">
+          <SlateRenderer content={story.content} />
+        </Content>
       </StyledContainer>
     </React.Fragment>
   );
