@@ -4,6 +4,10 @@ application:
   project: 'sigle'
   organization: 'QoveryCommunity'
   dockerfile: Dockerfile
+databases:
+  - type: 'POSTGRESQL'
+    name: 'sigle'
+    version: '12'
 routers:
   - name: 'main-sigle'
     custom_domains:
