@@ -8,6 +8,7 @@ import { DashboardPageTitle } from '../layout/components/DashboardHeader';
 import { useAuth } from '../auth/AuthContext';
 import { getSettingsFile } from '../../utils';
 import { SettingsForm } from './SettingsForm';
+import { SettingsActivateSupporter } from './SettingsActivateSupporter';
 
 export const Settings = () => {
   const { user } = useAuth();
@@ -32,6 +33,8 @@ export const Settings = () => {
         {user && settingsFile && (
           <SettingsForm settings={settingsFile} username={user.username} />
         )}
+
+        <SettingsActivateSupporter />
       </DashboardPageContainer>
     </DashboardLayout>
   );

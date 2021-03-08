@@ -4,6 +4,7 @@
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  output   = "../node_modules/.prisma/client"
 }
 
 generator client {
@@ -13,7 +14,7 @@ generator client {
 model User {
   id        Int      @id @default(autoincrement())
   username  String   @unique
-  domain    String   @unique
+  domain    String?  @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
